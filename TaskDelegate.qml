@@ -13,6 +13,21 @@ Rectangle {
         NumberAnimation {duration: 200}
     }
 
+    Image {
+        id: image
+        source: mouse.containsMouse ? "images/checked.png" : "images/circle.png"
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.verticalCenter: parent.verticalCenter
+        fillMode: Image.PreserveAspectFit
+        height: txt.implicitHeight
+        width: 20
+
+//        Behavior on source {
+//            NumberAnimation {duration: 200}
+//        }
+    }
+
     MouseArea {
         id: mouse
         anchors.fill: parent
@@ -22,7 +37,7 @@ Rectangle {
     Text {
         id: txt
         anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
+        anchors.left: image.right
         anchors.leftMargin: 10
         text: model.task // or task directly
         font.pixelSize: 18
