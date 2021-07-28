@@ -5,39 +5,31 @@ Window {
     width: 400
     height: 400
     visible: true
-    color: "#435560"
+    color: "#37474f"
     title: qsTr("To Do List")
 
     ListView {
         id: lv
         property var collapsed: ({})
         anchors.fill: parent
-//        anchors.bottomMargin: 20
         model: TasksModel {}
         delegate: TaskDelegate {
             anchors {left: parent.left; right: parent.right}
         }
-//        focus: true
-//        keyNavigationWraps: true
         clip: true
         spacing: 2
         header: Rectangle {
             anchors {left: parent.left; right: parent.right}
-            height: 5
+            height: 2
             radius: 2
-            color: "lightgray"
+            color: "#62727b"
         }
         footer: Rectangle {
             anchors {left: parent.left; right: parent.right}
-            height: 5
+            height: 2
             radius: 2
-            color: "lightgray"
+            color: "black"
         }
-//        highlight: Rectangle {
-//            anchors {left: parent.left; right: parent.right}
-//            //            height: 5
-//            color: "lightgray"
-//        }
 
         section {
             property: "type"
@@ -69,17 +61,5 @@ Window {
                 showSection(section)
             }
         }
-
-        //        Component.onCompleted: console.log(cacheBuffer)
-        //        onCurrentIndexChanged: console.log(currentIndex)
-        //        cacheBuffer: 200
     }
-
-//    Text {
-//        id: label
-//        anchors.bottom: parent.bottom
-//        anchors.horizontalCenter: parent.horizontalCenter
-//        text: "<b>" + lv.currentItem.text + "</b> is current"
-//        font.pixelSize: 16
-//    }
 }

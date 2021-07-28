@@ -2,11 +2,10 @@ import QtQuick 2.0
 
 Rectangle {
     readonly property ListView __lv: ListView.view
-    color: mouse.containsMouse ? "#6E7C7C" : "#92967D"
-//    width: parent.width
+    color: mouse.containsMouse ? "#62727b" : "#102027"
     implicitHeight: txt.implicitHeight + 5
-    border.width: 2
-    border.color: "black"
+//    border.width: 2
+//    border.color: "black"
     radius: 2
 
     Image {
@@ -29,6 +28,7 @@ Rectangle {
         font.pixelSize: 24
         font.bold: true
         text: section
+        color: "white"
     }
 
     MouseArea {
