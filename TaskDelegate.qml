@@ -5,12 +5,8 @@ Rectangle {
     property bool expanded: __lv.isSectionExpanded(model.type) // or type directly
     implicitHeight: txt.implicitHeight + 10
     height: expanded ? implicitHeight : 0
-    radius: 4
-    color: mouse.containsMouse ? "#62727b" : "#37474f"
-    border {
-        color: "black"
-        width: 2
-    }
+    radius: 5
+    color: mouse.containsMouse ? "#819ca9" : "#62727b"
     clip: true
 
     Behavior on height {

@@ -2,16 +2,20 @@ import QtQuick 2.0
 
 Rectangle {
     readonly property ListView __lv: ListView.view
-    color: mouse.containsMouse ? "#62727b" : "#102027"
+    color: mouse.containsMouse ? "#819ca9" : "#37474f"
     implicitHeight: txt.implicitHeight + 5
-//    border.width: 2
-//    border.color: "black"
-    radius: 2
+    radius: 5
+    border {
+        color: "black"
+        width: 1
+    }
 
     Image {
-        source: "images/collapse"
+        id: image
+        source: "images/collapse.png"
         anchors.left: parent.left
         anchors.leftMargin: 5
+        anchors.verticalCenter: parent.verticalCenter
         fillMode: Image.PreserveAspectFit
         height: txt.implicitHeight
         width: 20
@@ -24,7 +28,9 @@ Rectangle {
 
     Text {
         id: txt
-        anchors.centerIn: parent
+        anchors.left: image.right
+        anchors.leftMargin: 10
+        anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 24
         font.bold: true
         text: section
