@@ -1,17 +1,24 @@
 import QtQuick 2.0
 
-Component {
+Rectangle {
+    readonly property ListView __lv: ListView.view
+    color: "orange"
+    width: parent.width
+    implicitHeight: txt.implicitHeight + 5
+    border.width: 2
+    border.color: "black"
 
-    Rectangle {
-        color: "orange"
-        width: parent.width
-        implicitHeight: text.implicitHeight + 5
-        Text {
-            id: text
-            anchors.centerIn: parent
-            font.pixelSize: 16
-            font.bold: true
-            text: section
-        }
+    Text {
+        id: txt
+        anchors.centerIn: parent
+        font.pixelSize: 16
+        font.bold: true
+        text: section
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: __lv.toggleSection(section)
     }
 }
+

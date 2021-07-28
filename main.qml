@@ -7,23 +7,16 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    ListModel {
-        id: nameModel
-        ListElement {name: "Alice"; team: "Crypto"}
-        ListElement {name: "Bob"; team: "Crypto"}
-        ListElement {name: "Jane"; team: "QA"}
-        ListElement {name: "Victor"; team: "QA"}
-        ListElement {name: "Wendy"; team: "Graphics"}
-    }
-
     ListView {
         id: lv
+        property var collapsed: ({})
         anchors.fill: parent
-        anchors.bottomMargin: 20
-        model: nameModel
+//        anchors.bottomMargin: 20
+        model: TasksModel {}
         delegate: TaskDelegate {}
         focus: true
         clip: true
+        spacing: 1
         keyNavigationWraps: true
         header: Rectangle {
             anchors {left: parent.left; right: parent.right}
@@ -41,21 +34,47 @@ Window {
             color: "lightgray"
         }
 
-        section.property: "team"
-        section.criteria: ViewSection.FullString // or ViewSection.FirstCharacter
+        section {
+            property: "type"
+            criteria: ViewSection.FullString // or ViewSection.FirstCharacter
+            delegate: SectionDelegate {}
+        }
 
-        section.delegate: SectionDelegate {}
+        function isSectionExpanded(section) {
+            return !(section in collapsed)
+        }
+
+        function showSection(section) {
+            delete collapsed[section]
+            collapsedChanged()
+        }
+
+        function hideSection(section) {
+            collapsed[section] = true
+            collapsedChanged()
+        }
+
+        function toggleSection(section) {
+            if(isSectionExpanded(section)) {
+                hideSection(section)
+                console.log(collapsed, "Expanded")
+            }
+            else {
+                showSection(section)
+                console.log(collapsed, "Collapsed")
+            }
+        }
 
         //        Component.onCompleted: console.log(cacheBuffer)
         //        onCurrentIndexChanged: console.log(currentIndex)
         //        cacheBuffer: 200
     }
 
-    Text {
-        id: label
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        text: "<b>" + lv.currentItem.text + "</b> is current"
-        font.pixelSize: 16
-    }
+//    Text {
+//        id: label
+//        anchors.bottom: parent.bottom
+//        anchors.horizontalCenter: parent.horizontalCenter
+//        text: "<b>" + lv.currentItem.text + "</b> is current"
+//        font.pixelSize: 16
+//    }
 }

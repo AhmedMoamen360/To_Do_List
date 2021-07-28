@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>SectionDelegate.qml</file>
         <file>TaskDelegate.qml</file>
+        <file>TasksModel.qml</file>
     </qresource>
 </RCC>

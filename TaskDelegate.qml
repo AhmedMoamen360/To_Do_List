@@ -1,32 +1,41 @@
 import QtQuick 2.0
 
-Component {
+Text {
+    //    id: txt
+    readonly property ListView __lv: ListView.view
+    property bool expanded: __lv.isSectionExpanded(model.type) // or type directly
+    width: parent.width
+//    anchors {
+//        left: parent != null ? parent.left : undefined
+//        right: parent != null ? parent.right : undefined
+//    }
+    height: expanded ? implicitHeight : 0
+    text: model.task // or task directly
+    font.pixelSize: 32
+    clip: true
 
-    Text {
-        id: txt
-        readonly property ListView __lv: ListView.view
-        width: parent.width
-        text: model.name // or name directly
-        font.pixelSize: 32
-        //            Component.onCompleted: console.log("Welcome", model.index, model.name)
-        //            Component.onDestruction: console.log("Die", model.index, model.name)
+    //            Component.onCompleted: console.log("Welcome", model.index, model.name)
+    //            Component.onDestruction: console.log("Die", model.index, model.name)
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: __lv.currentIndex = index // or model.index the same
-        }
+    Behavior on height {
+        NumberAnimation {duration: 200}
     }
 
-    //        Rectangle {
-    //            // view is an attached property with ListView to give a pointer
-    //            // to the root of the delegate
-    //            color: __lv.currentIndex == index ? "grey" : "yellow"
-    //            implicitHeight: txt.implicitHeight
-    //            //            implicitWidth: txt.implicitWidth
-    //            anchors {
-    //                left: parent != null ? parent.left : undefined
-    //                right: parent != null ? parent.right : undefined
-    //            }
-
-    //        }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: __lv.currentIndex = index // or model.index the same
+    }
 }
+
+//        Rectangle {
+//            // view is an attached property with ListView to give a pointer
+//            // to the root of the delegate
+//            color: __lv.currentIndex == index ? "grey" : "yellow"
+//            implicitHeight: txt.implicitHeight
+//            //            implicitWidth: txt.implicitWidth
+//            anchors {
+//                left: parent != null ? parent.left : undefined
+//                right: parent != null ? parent.right : undefined
+//            }
+
+//        }
