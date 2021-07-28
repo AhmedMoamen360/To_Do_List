@@ -8,6 +8,8 @@ Rectangle {
     implicitHeight: txt_input.implicitHeight + 5
     radius: 5
 
+    signal addTask(string task)
+
     Image {
         id: image
         source: "images/add.png"
@@ -27,15 +29,20 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 18
         color: "white"
-    }
+        onAccepted: {
+            if(text != "") {
+                parent.addTask(text)
+            }
 
+        }
+    }
     MouseArea {
         id: mouse
         anchors.fill: parent
         hoverEnabled: true
-
         onClicked: {
             txt_input.focus = true
+            txt_input.text = txt_input.text == "Add a Task" ? "" : txt_input.text
         }
     }
 

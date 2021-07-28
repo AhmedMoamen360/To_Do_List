@@ -16,6 +16,13 @@ Window {
         }
     }
 
+    Component.onCompleted: field.addTask.connect(updateModel)
+
+    function updateModel(task) {
+        lv.model.append({"task": task, "type": "To Do"})
+        lv.forceLayout()
+    }
+
     function isInsideRect(x, y) {
         return (x >= field.x && x <= field.x + field.width && y >= field.y && y <= field.y + field.height)
     }
@@ -56,7 +63,7 @@ Window {
             anchors {left: parent.left; right: parent.right}
             height: 3
             radius: 5
-            color: "#102027"
+            color: "#37474f"
         }
 
         section {
