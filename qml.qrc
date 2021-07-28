@@ -4,5 +4,6 @@
         <file>SectionDelegate.qml</file>
         <file>TaskDelegate.qml</file>
         <file>TasksModel.qml</file>
+        <file>images/collapse.png</file>
     </qresource>
 </RCC>
