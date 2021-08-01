@@ -8,7 +8,7 @@
         <file>TaskField.qml</file>
         <file>images/completed.png</file>
         <file>images/add.png</file>
-        <file>images/checked.png</file>
         <file>images/circle.png</file>
+        <file>images/checked.png</file>
     </qresource>
 </RCC>

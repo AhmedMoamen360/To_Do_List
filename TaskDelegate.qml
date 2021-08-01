@@ -15,7 +15,18 @@ Rectangle {
 
     Image {
         id: image
-        source: mouse.containsMouse ? "images/checked.png" : "images/circle.png"
+        source: {
+            if(type == "Completed") {
+                return "images/completed.png"
+            }
+
+            if(mouse.containsMouse) {
+                return "images/checked.png"
+            }
+            else {
+                return "images/circle.png"
+            }
+        }
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.verticalCenter: parent.verticalCenter
@@ -28,6 +39,20 @@ Rectangle {
         id: mouse
         anchors.fill: parent
         hoverEnabled: true
+        onClicked: {
+
+            if(type == "To Do") {
+                __lv.model.setProperty(index, "type", "Working On")
+            }
+
+            else if(type == "Working On") {
+                __lv.model.setProperty(index, "type", "Completed")
+            }
+
+            else if(type == "Completed") {
+                __lv.model.setProperty(index, "type", "Working On")
+            }
+        }
     }
 
     Text {
