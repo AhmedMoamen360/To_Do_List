@@ -6,7 +6,7 @@ Rectangle {
     implicitHeight: txt.implicitHeight + 10
     height: expanded ? implicitHeight : 0
     radius: 5
-    color: mouse.containsMouse ? "#819ca9" : "#62727b"
+    color: mouse.containsMouse ? "#9e9e9e" : "#242426"
     clip: true
 
     Behavior on height {
@@ -22,10 +22,6 @@ Rectangle {
         fillMode: Image.PreserveAspectFit
         height: txt.implicitHeight
         width: 20
-
-//        Behavior on source {
-//            NumberAnimation {duration: 200}
-//        }
     }
 
     MouseArea {

@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Rectangle {
     readonly property ListView __lv: ListView.view
-    color: mouse.containsMouse ? "#819ca9" : "#37474f"
+    color: mouse.containsMouse ? "#9e9e9e" : "#37474f"
     implicitHeight: txt.implicitHeight + 5
     radius: 5
     border {

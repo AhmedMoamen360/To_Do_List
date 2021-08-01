@@ -4,7 +4,7 @@ Rectangle {
     property alias input_focus: txt_input.focus
     property alias input_text: txt_input.text
 
-    color: mouse.containsMouse ? "#819ca9" : "#37474f"
+    color: mouse.containsMouse ? "#9e9e9e" : "#37474f"
     implicitHeight: txt_input.implicitHeight + 5
     radius: 5
 
@@ -29,6 +29,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 18
         color: "white"
+        selectByMouse: true
         onAccepted: {
             if(text != "") {
                 parent.addTask(text)

@@ -5,7 +5,7 @@ Window {
     width: 500
     height: 350
     visible: true
-    color: "#102027"
+    color: "#1A1B1C"
     title: qsTr("To Do List")
 
     MouseArea {
@@ -19,8 +19,7 @@ Window {
     Component.onCompleted: field.addTask.connect(updateModel)
 
     function updateModel(task) {
-        lv.model.append({"task": task, "type": "To Do"})
-        lv.forceLayout()
+        lv.model.append({"task": task, "type": "Completed"})
     }
 
     function isInsideRect(x, y) {
