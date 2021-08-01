@@ -9,6 +9,60 @@ Rectangle {
     color: mouse.containsMouse ? "#9e9e9e" : "#242426"
     clip: true
 
+    states: [
+        State {
+            name: "To Do"
+            PropertyChanges {
+                target: __lv.model.get(index)
+                type: "Working On"
+            }
+        },
+        State {
+            name: "Working On"
+            PropertyChanges {
+                target: __lv.model.get(index)
+                type: "Completed"
+            }
+        },
+        State {
+            name: "Completed"
+            PropertyChanges {
+                target: __lv.model.get(index)
+                type: "Working On"
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: "To Do"
+            to: "Working On"
+            PropertyAnimation {
+                target: __lv.model.get(index)
+                properties: "type"
+                duration: 100
+            }
+        },
+        Transition {
+            from: "Working On"
+            to: "Completed"
+            PropertyAnimation {
+                target: __lv.model.get(index)
+                properties: "type"
+                duration: 100
+            }
+        },
+        Transition {
+            from: "Completed"
+            to: "Working On"
+            PropertyAnimation {
+                target: __lv.model.get(index)
+                properties: "type"
+                duration: 100
+            }
+        }
+    ]
+
     Behavior on height {
         NumberAnimation {duration: 200}
     }
@@ -41,16 +95,23 @@ Rectangle {
         hoverEnabled: true
         onClicked: {
 
-            if(type == "To Do") {
-                __lv.model.setProperty(index, "type", "Working On")
-            }
+//            if(type == "To Do") {
+//                __lv.model.setProperty(index, "type", "Working On")
+//            }
 
-            else if(type == "Working On") {
-                __lv.model.setProperty(index, "type", "Completed")
-            }
+//            else if(type == "Working On") {
+//                __lv.model.setProperty(index, "type", "Completed")
+//            }
 
-            else if(type == "Completed") {
-                __lv.model.setProperty(index, "type", "Working On")
+//            else if(type == "Completed") {
+//                __lv.model.setProperty(index, "type", "Working On")
+//            }
+
+            switch (parent.state) {
+            case "": parent.state = type; break
+            case "To Do": parent.state = "Working On"; break
+            case "Working On": parent.state = "Completed"; break
+            case "Completed": parent.state = "Working On"; break
             }
         }
     }
