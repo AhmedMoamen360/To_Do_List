@@ -14,13 +14,6 @@ Rectangle {
             name: "To Do"
             PropertyChanges {
                 target: __lv.model.get(index)
-                type: "Working On"
-            }
-        },
-        State {
-            name: "Working On"
-            PropertyChanges {
-                target: __lv.model.get(index)
                 type: "Completed"
             }
         },
@@ -28,7 +21,7 @@ Rectangle {
             name: "Completed"
             PropertyChanges {
                 target: __lv.model.get(index)
-                type: "Working On"
+                type: "To Do"
             }
         }
     ]
@@ -36,15 +29,6 @@ Rectangle {
     transitions: [
         Transition {
             from: "To Do"
-            to: "Working On"
-            PropertyAnimation {
-                target: __lv.model.get(index)
-                properties: "type"
-                duration: 100
-            }
-        },
-        Transition {
-            from: "Working On"
             to: "Completed"
             PropertyAnimation {
                 target: __lv.model.get(index)
@@ -53,8 +37,8 @@ Rectangle {
             }
         },
         Transition {
-            from: "Completed"
-            to: "Working On"
+            from: "To Do"
+            to: "Completed"
             PropertyAnimation {
                 target: __lv.model.get(index)
                 properties: "type"
@@ -109,9 +93,8 @@ Rectangle {
 
             switch (parent.state) {
             case "": parent.state = type; break
-            case "To Do": parent.state = "Working On"; break
-            case "Working On": parent.state = "Completed"; break
-            case "Completed": parent.state = "Working On"; break
+            case "To Do": parent.state = "Completed"; break
+            case "Completed": parent.state = "To Do"; break
             }
         }
     }
