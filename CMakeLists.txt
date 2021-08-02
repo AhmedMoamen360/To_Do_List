@@ -28,6 +28,8 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 set(PROJECT_SOURCES
+        include/to-do-list/task.h
+        src/to-do-list/task.cpp
         include/to-do-list/sortedmodel.h
         src/to-do-list/sortedmodel.cpp
         src/to-do-list/main.cpp
@@ -67,3 +69,9 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_import_qml_plugins(To_Do_List)
     qt_finalize_executable(To_Do_List)
 endif()
+
+
+target_include_directories(To_Do_List
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)

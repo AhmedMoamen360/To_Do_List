@@ -1,6 +1,8 @@
-#include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <QGuiApplication>
+#include <QQuickView>
+#include <QQmlContext>
+#include "to-do-list/sortedmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +16,14 @@ int main(int argc, char *argv[])
     }
 
     QGuiApplication app(argc, argv);
+    qmlRegisterType<SortedModel>("SortedModel", 1, 0, "SortedModel");
+
+//    SortedModel * sortedModel = new SortedModel;
+
+//    QQuickView view;
+//    view.rootContext()->setContextProperty("sortedTasks", sortedModel);
+//    view.setSource(QUrl("qrc:/qml/main.qml"));
+//    view.show();
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));

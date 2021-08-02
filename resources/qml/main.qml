@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+import SortedModel 1.0
 
 Window {
     width: 500
@@ -19,7 +20,7 @@ Window {
     Component.onCompleted: field.addTask.connect(updateModel)
 
     function updateModel(task) {
-        lv.model.append({"task": task, "type": "To Do"})
+        lv.model.addTask(task)
     }
 
     function isInsideRect(x, y) {
@@ -52,7 +53,7 @@ Window {
             rightMargin: 5
             topMargin: 5
         }
-        model: TasksModel {}
+        model: SortedModel {} // TasksModel {}
         delegate: TaskDelegate {
             anchors {left: parent.left; right: parent.right}
         }

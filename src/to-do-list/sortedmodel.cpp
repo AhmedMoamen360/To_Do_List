@@ -1,53 +1,72 @@
-#include "include/to-do-list/sortedmodel.h"
+#include "to-do-list/sortedmodel.h"
 #include <QByteArray>
+#include <QDebug>
 
-SortedModel::SortedModel(QObject *parent) : QAbstractListModel(parent)
+SortedModel::SortedModel(QObject *parent) : QSortFilterProxyModel(parent)
 {
-    m_data
-        << Data("To Do", "Test")
-        << Data("Completed", "Search")
-        << Data("Completed", "Design")
-        << Data("To Do", "Deploy")
-        << Data("Completed", "Develop");
+    tasks
+        << Task("To Do", "Test")
+        << Task("Completed", "Search")
+        << Task("Completed", "Design")
+        << Task("To Do", "Deploy")
+        << Task("Completed", "Develop");
+
+//    setDynamicSortFilter(true);
+//    sort(0, Qt::DescendingOrder);
 }
 
 int SortedModel::rowCount(const QModelIndex &parent) const
 {
-    if(parent.isValid())
-        return 0;
-
-    return m_data.count();
+    qsizetype size = parent.isValid() ? 0 : tasks.count();
+    return size;
 }
 
 QVariant SortedModel::data(const QModelIndex &index, int role) const
 {
-    if(!index.isValid())
+    if(index.row() < 0 || index.row() >= tasks.count())
         return QVariant();
 
-    const Data& data = m_data.at(index.row());
-    if(role == TypeRole)
-        return data.type;
-    else if(role == TaskRole)
-        return data.task;
-    else
-        return QVariant();
+    const Task& data = tasks[index.row()];
+    switch (role) {
+        case TypeRole:
+            return data.getType();
+        case TaskRole:
+            return data.getTask();
+        default:
+            return QVariant();
+    }
 }
 
 QHash<int, QByteArray> SortedModel::roleNames() const
 {
-    static QHash<int, QByteArray> mapping {
-        {TypeRole, "type"},
-        {TaskRole, "task"}
-    };
+    QHash<int, QByteArray> mapping;
+    mapping.insert(TypeRole, "type");
+    mapping.insert(TaskRole, "task");
+
     return mapping;
 }
 
-void SortedModel::duplicateData(int row)
+void SortedModel::addTask(const QString& task)
 {
 
+    const Task new_task("To Do", task);
+    const int rowOfInsert = task.count();
+
+    beginInsertRows(QModelIndex(), rowOfInsert, rowOfInsert);
+    tasks.insert(rowOfInsert, new_task);
+    endInsertRows();
 }
 
-void SortedModel::removeData(int row)
+void SortedModel::editTaskType(const QString& type, int row)
 {
-
+    tasks[row].setType(type);
 }
+
+bool SortedModel::lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const
+{
+    const QString leftTask = sourceLeft.data(TypeRole).toString();
+    const QString rightTask = sourceRight.data(TypeRole).toString();
+
+    return leftTask > rightTask;
+}
+

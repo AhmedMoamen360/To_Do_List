@@ -1,16 +1,10 @@
 #ifndef SORTEDMODEL_H
 #define SORTEDMODEL_H
 
-#include <QAbstractListModel>
+#include <QSortFilterProxyModel>
+#include "to-do-list/task.h"
 
-struct Data {
-    Data() {}
-    Data(const QString& type, const QString& task) : type(type), task(task) {}
-    QString type;
-    QString task;
-};
-
-class SortedModel : public QAbstractListModel
+class SortedModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
@@ -22,15 +16,18 @@ public:
 
     explicit SortedModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex& parent) const override;
-    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const override;
+    QVariant data( const QModelIndex& index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
-    void duplicateData(int row);
-    void removeData(int row);
+    void addTask(const QString& task);
+    void editTaskType(const QString& task, int row);
+
+protected:
+    bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
 
 private:
-    QVector<Data> m_data;
+    QVector<Task> tasks;
 
 };
 
