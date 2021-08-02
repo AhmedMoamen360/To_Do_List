@@ -1,14 +1,16 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>SectionDelegate.qml</file>
-        <file>TaskDelegate.qml</file>
-        <file>TasksModel.qml</file>
-        <file>images/collapse.png</file>
-        <file>TaskField.qml</file>
-        <file>images/completed.png</file>
-        <file>images/add.png</file>
-        <file>images/circle.png</file>
-        <file>images/checked.png</file>
+        <file>resources/main.qml</file>
+        <file>resources/SectionDelegate.qml</file>
+        <file>resources/TaskDelegate.qml</file>
+        <file>resources/TasksModel.qml</file>
+        <file>resources/images/collapse.png</file>
+        <file>resources/TaskField.qml</file>
+        <file>resources/images/completed.png</file>
+        <file>resources/images/add.png</file>
+        <file>resources/images/circle.png</file>
+        <file>resources/images/checked.png</file>
+        <file>src/sortedmodel.cpp</file>
+        <file>src/sortedmodel.h</file>
     </qresource>
 </RCC>

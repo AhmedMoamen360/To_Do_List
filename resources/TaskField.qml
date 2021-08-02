@@ -33,6 +33,7 @@ Rectangle {
         onAccepted: {
             if(text != "") {
                 parent.addTask(text)
+                text = ""
             }
 
         }

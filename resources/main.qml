@@ -19,7 +19,7 @@ Window {
     Component.onCompleted: field.addTask.connect(updateModel)
 
     function updateModel(task) {
-        lv.model.append({"task": task, "type": "Completed"})
+        lv.model.append({"task": task, "type": "To Do"})
     }
 
     function isInsideRect(x, y) {
