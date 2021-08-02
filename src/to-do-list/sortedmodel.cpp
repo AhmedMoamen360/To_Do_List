@@ -1,7 +1,7 @@
-#include "sortedmodel.h"
+#include "include/to-do-list/sortedmodel.h"
 #include <QByteArray>
 
-SortedModel::SortedModel(QObject *parent) : QObject(parent)
+SortedModel::SortedModel(QObject *parent)
 {
 
 }

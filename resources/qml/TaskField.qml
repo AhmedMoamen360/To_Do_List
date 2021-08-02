@@ -12,7 +12,7 @@ Rectangle {
 
     Image {
         id: image
-        source: "images/add.png"
+        source: "qrc:/icons/add.png"
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.verticalCenter: parent.verticalCenter

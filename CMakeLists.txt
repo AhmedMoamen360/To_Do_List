@@ -28,8 +28,10 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 set(PROJECT_SOURCES
-        src/main.cpp
-        qml.qrc
+#        src/to-do-list/sortedmodel.cpp
+        src/to-do-list/main.cpp
+        resources/qml/qml.qrc
+        resources/icons/icons.qrc
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -55,14 +55,14 @@ Rectangle {
         id: image
         source: {
             if(type == "Completed") {
-                return "images/completed.png"
+                return "qrc:/icons/completed.png"
             }
 
             if(mouse.containsMouse) {
-                return "images/checked.png"
+                return "qrc:/icons/checked.png"
             }
             else {
-                return "images/circle.png"
+                return "qrc:/icons/circle.png"
             }
         }
         anchors.left: parent.left
@@ -105,6 +105,7 @@ Rectangle {
         anchors.left: image.right
         anchors.leftMargin: 10
         text: model.task // or task directly
+        font.strikeout: type == "Completed" ? true : false
         font.pixelSize: 18
         color: "white"
     }
