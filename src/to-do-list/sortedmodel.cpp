@@ -1,8 +1,7 @@
 #include "to-do-list/sortedmodel.h"
 #include <QByteArray>
-#include <QDebug>
 
-SortedModel::SortedModel(QObject *parent) : QSortFilterProxyModel(parent)
+SortedModel::SortedModel(QObject *parent) : QAbstractListModel(parent)
 {
     tasks
         << Task("To Do", "Test")
@@ -10,15 +9,11 @@ SortedModel::SortedModel(QObject *parent) : QSortFilterProxyModel(parent)
         << Task("Completed", "Design")
         << Task("To Do", "Deploy")
         << Task("Completed", "Develop");
-
-//    setDynamicSortFilter(true);
-//    sort(0, Qt::DescendingOrder);
 }
 
 int SortedModel::rowCount(const QModelIndex &parent) const
 {
-    qsizetype size = parent.isValid() ? 0 : tasks.count();
-    return size;
+    return parent.isValid() ? 0 : tasks.count();
 }
 
 QVariant SortedModel::data(const QModelIndex &index, int role) const
@@ -60,13 +55,9 @@ void SortedModel::addTask(const QString& task)
 void SortedModel::editTaskType(const QString& type, int row)
 {
     tasks[row].setType(type);
-}
 
-bool SortedModel::lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const
-{
-    const QString leftTask = sourceLeft.data(TypeRole).toString();
-    const QString rightTask = sourceRight.data(TypeRole).toString();
-
-    return leftTask > rightTask;
+    const QModelIndex startIndex = index(0, 0);
+    const QModelIndex endIndex   = index(tasks.count() - 1, 0);
+    emit dataChanged(startIndex, endIndex, QVector<int>() << TypeRole);
 }
 

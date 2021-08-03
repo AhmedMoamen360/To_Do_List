@@ -9,43 +9,43 @@ Rectangle {
     color: mouse.containsMouse ? "#9e9e9e" : "#242426"
     clip: true
 
-    states: [
-        State {
-            name: "To Do"
-            PropertyChanges {
-                target: __lv.model.get(index)
-                type: "Completed"
-            }
-        },
-        State {
-            name: "Completed"
-            PropertyChanges {
-                target: __lv.model.get(index)
-                type: "To Do"
-            }
-        }
-    ]
+//    states: [
+//        State {
+//            name: "To Do"
+//            PropertyChanges {
+//                target: __lv.model.get(index)
+//                type: "Completed"
+//            }
+//        },
+//        State {
+//            name: "Completed"
+//            PropertyChanges {
+//                target: __lv.model.get(index)
+//                type: "To Do"
+//            }
+//        }
+//    ]
 
-    transitions: [
-        Transition {
-            from: "To Do"
-            to: "Completed"
-            PropertyAnimation {
-                target: __lv.model.get(index)
-                properties: "type"
-                duration: 100
-            }
-        },
-        Transition {
-            from: "To Do"
-            to: "Completed"
-            PropertyAnimation {
-                target: __lv.model.get(index)
-                properties: "type"
-                duration: 100
-            }
-        }
-    ]
+//    transitions: [
+//        Transition {
+//            from: "To Do"
+//            to: "Completed"
+//            PropertyAnimation {
+//                target: __lv.model.get(index)
+//                properties: "type"
+//                duration: 100
+//            }
+//        },
+//        Transition {
+//            from: "To Do"
+//            to: "Completed"
+//            PropertyAnimation {
+//                target: __lv.model.get(index)
+//                properties: "type"
+//                duration: 100
+//            }
+//        }
+//    ]
 
     Behavior on height {
         NumberAnimation {duration: 200}
@@ -79,23 +79,19 @@ Rectangle {
         hoverEnabled: true
         onClicked: {
 
-//            if(type == "To Do") {
-//                __lv.model.setProperty(index, "type", "Working On")
-//            }
-
-//            else if(type == "Working On") {
-//                __lv.model.setProperty(index, "type", "Completed")
-//            }
-
-//            else if(type == "Completed") {
-//                __lv.model.setProperty(index, "type", "Working On")
-//            }
-
-            switch (parent.state) {
-            case "": parent.state = type; break
-            case "To Do": parent.state = "Completed"; break
-            case "Completed": parent.state = "To Do"; break
+            if(type == "Completed") {
+                __lv.model.editTaskType("To Do", index)
             }
+
+            else if(type == "To Do") {
+                __lv.model.editTaskType("Completed", index)
+            }
+
+//            switch (parent.state) {
+//            case "": parent.state = type; break
+//            case "To Do": parent.state = "Completed"; break
+//            case "Completed": parent.state = "To Do"; break
+//            }
         }
     }
 

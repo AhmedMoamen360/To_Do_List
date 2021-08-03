@@ -1,10 +1,5 @@
 #include "to-do-list/task.h"
 
-Task::Task()
-{
-
-}
-
 Task::Task(const QString& type, const QString& task) : type(type), task(task)
 {
 

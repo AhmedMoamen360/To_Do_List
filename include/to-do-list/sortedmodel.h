@@ -1,10 +1,10 @@
 #ifndef SORTEDMODEL_H
 #define SORTEDMODEL_H
 
-#include <QSortFilterProxyModel>
+#include <QAbstractListModel>
 #include "to-do-list/task.h"
 
-class SortedModel : public QSortFilterProxyModel
+class SortedModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -22,9 +22,6 @@ public:
 public slots:
     void addTask(const QString& task);
     void editTaskType(const QString& task, int row);
-
-protected:
-    bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;
 
 private:
     QVector<Task> tasks;

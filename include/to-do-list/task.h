@@ -6,7 +6,6 @@
 class Task {
 
 public:
-    Task();
     Task(const QString& type, const QString& task);
     QString getType() const;
     QString getTask() const;
