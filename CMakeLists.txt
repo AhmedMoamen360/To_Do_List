@@ -30,8 +30,10 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 set(PROJECT_SOURCES
         include/to-do-list/task.h
         src/to-do-list/task.cpp
-        include/to-do-list/sortedmodel.h
-        src/to-do-list/sortedmodel.cpp
+        include/to-do-list/taskmodel.h
+        src/to-do-list/taskmodel.cpp
+        include/to-do-list/sortedtasks.h
+        src/to-do-list/sortedtasks.cpp
         src/to-do-list/main.cpp
         resources/qml/qml.qrc
         resources/icons/icons.qrc

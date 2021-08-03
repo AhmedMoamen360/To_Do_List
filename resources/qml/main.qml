@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
-import SortedModel 1.0
+import SortedTasks 1.0
 
 Window {
     width: 500
@@ -53,7 +53,7 @@ Window {
             rightMargin: 5
             topMargin: 5
         }
-        model: SortedModel {} // TasksModel {}
+        model: SortedTasks {} // TasksModel {}
         delegate: TaskDelegate {
             anchors {left: parent.left; right: parent.right}
         }

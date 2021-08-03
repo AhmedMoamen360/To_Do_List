@@ -1,7 +1,7 @@
-#include "to-do-list/sortedmodel.h"
+#include "to-do-list/taskmodel.h"
 #include <QByteArray>
 
-SortedModel::SortedModel(QObject *parent) : QAbstractListModel(parent)
+TaskModel::TaskModel(QObject *parent) : QAbstractListModel(parent)
 {
     tasks
         << Task("To Do", "Test")
@@ -11,12 +11,12 @@ SortedModel::SortedModel(QObject *parent) : QAbstractListModel(parent)
         << Task("Completed", "Develop");
 }
 
-int SortedModel::rowCount(const QModelIndex &parent) const
+int TaskModel::rowCount(const QModelIndex &parent) const
 {
     return parent.isValid() ? 0 : tasks.count();
 }
 
-QVariant SortedModel::data(const QModelIndex &index, int role) const
+QVariant TaskModel::data(const QModelIndex &index, int role) const
 {
     if(index.row() < 0 || index.row() >= tasks.count())
         return QVariant();
@@ -32,7 +32,7 @@ QVariant SortedModel::data(const QModelIndex &index, int role) const
     }
 }
 
-QHash<int, QByteArray> SortedModel::roleNames() const
+QHash<int, QByteArray> TaskModel::roleNames() const
 {
     QHash<int, QByteArray> mapping;
     mapping.insert(TypeRole, "type");
@@ -41,9 +41,8 @@ QHash<int, QByteArray> SortedModel::roleNames() const
     return mapping;
 }
 
-void SortedModel::addTask(const QString& task)
+void TaskModel::addTask(const QString& task)
 {
-
     const Task new_task("To Do", task);
     const int rowOfInsert = tasks.count();
 
@@ -52,7 +51,7 @@ void SortedModel::addTask(const QString& task)
     endInsertRows();
 }
 
-void SortedModel::editTaskType(const QString& type, int row)
+void TaskModel::editTaskType(const QString& type, int row)
 {
     tasks[row].setType(type);
 

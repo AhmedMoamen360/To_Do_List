@@ -1,10 +1,10 @@
-#ifndef SORTEDMODEL_H
-#define SORTEDMODEL_H
+#ifndef TASKMODEL_H
+#define TASKMODEL_H
 
 #include <QAbstractListModel>
 #include "to-do-list/task.h"
 
-class SortedModel : public QAbstractListModel
+class TaskModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -14,7 +14,7 @@ public:
         TaskRole
     };
 
-    explicit SortedModel(QObject *parent = nullptr);
+    explicit TaskModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex& parent) const override;
     QVariant data( const QModelIndex& index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
@@ -28,4 +28,4 @@ private:
 
 };
 
-#endif // SORTEDMODEL_H
+#endif // TASKMODEL_H

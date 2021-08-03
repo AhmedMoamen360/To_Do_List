@@ -2,7 +2,7 @@
 #include <QGuiApplication>
 #include <QQuickView>
 #include <QQmlContext>
-#include "to-do-list/sortedmodel.h"
+#include "to-do-list/sortedtasks.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,9 +16,9 @@ int main(int argc, char *argv[])
     }
 
     QGuiApplication app(argc, argv);
-    qmlRegisterType<SortedModel>("SortedModel", 1, 0, "SortedModel");
+    qmlRegisterType<SortedTasks>("SortedTasks", 1, 0, "SortedTasks");
 
-//    SortedModel * sortedModel = new SortedModel;
+//    TaskModel * sortedModel = new TaskModel;
 
 //    QQuickView view;
 //    view.rootContext()->setContextProperty("sortedTasks", sortedModel);
