@@ -45,7 +45,7 @@ void SortedModel::addTask(const QString& task)
 {
 
     const Task new_task("To Do", task);
-    const int rowOfInsert = task.count();
+    const int rowOfInsert = tasks.count();
 
     beginInsertRows(QModelIndex(), rowOfInsert, rowOfInsert);
     tasks.insert(rowOfInsert, new_task);
