@@ -29,7 +29,6 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 18
         color: "white"
-        selectByMouse: true
         onAccepted: {
             if(text != "") {
                 parent.addTask(text)

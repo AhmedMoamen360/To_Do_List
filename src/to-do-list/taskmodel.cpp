@@ -60,3 +60,12 @@ void TaskModel::editTaskType(const QString& type, int row)
     emit dataChanged(startIndex, endIndex, QVector<int>() << TypeRole);
 }
 
+void TaskModel::editTask(const QString &task, int row)
+{
+    tasks[row].setTask(task);
+
+    const QModelIndex startIndex = index(0, 0);
+    const QModelIndex endIndex   = index(tasks.count() - 1, 0);
+    emit dataChanged(startIndex, endIndex, QVector<int>() << TaskRole);
+}
+

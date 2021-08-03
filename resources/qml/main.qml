@@ -12,7 +12,7 @@ Window {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            field.input_focus = isInsideRect(x, y)
+            field.input_focus = false
             field.input_text = field.input_text == "" ? "Add a Task" : field.input_text
         }
     }
@@ -21,10 +21,6 @@ Window {
 
     function updateModel(task) {
         lv.model.addTask(task)
-    }
-
-    function isInsideRect(x, y) {
-        return (x >= field.x && x <= field.x + field.width && y >= field.y && y <= field.y + field.height)
     }
 
     TaskField {
@@ -53,11 +49,13 @@ Window {
             rightMargin: 5
             topMargin: 5
         }
-        model: SortedTasks {} // TasksModel {}
+        model: SortedTasks {}
         delegate: TaskDelegate {
             anchors {left: parent.left; right: parent.right}
+            task_focus: false
         }
         clip: true
+        focus: true
         flickableDirection: Flickable.VerticalFlick
         boundsBehavior: Flickable.StopAtBounds
         spacing: 5

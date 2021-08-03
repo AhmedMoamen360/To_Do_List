@@ -22,6 +22,7 @@ public:
 public slots:
     void addTask(const QString& task);
     void editTaskType(const QString& type, int row);
+    void editTask(const QString& task, int row);
 
 private:
     QVector<Task> tasks;
