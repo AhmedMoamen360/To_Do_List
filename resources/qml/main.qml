@@ -32,10 +32,10 @@ Window {
         input_focus: false
         input_text: "Add a Task"
         anchors {
-            top: lv.bottom
+            bottom: parent.bottom
             leftMargin: 5
             rightMargin: 5
-            topMargin: 20
+            bottomMargin: 20
             left: parent.left
             right: parent.right
         }
@@ -58,6 +58,8 @@ Window {
             anchors {left: parent.left; right: parent.right}
         }
         clip: true
+        flickableDirection: Flickable.VerticalFlick
+        boundsBehavior: Flickable.StopAtBounds
         spacing: 5
         footer: Rectangle {
             anchors {left: parent.left; right: parent.right}
