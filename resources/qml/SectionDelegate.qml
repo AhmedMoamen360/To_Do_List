@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
+    id: root
     readonly property ListView __lv: ListView.view
     readonly property string __ls: section
     color: mouse.containsMouse ? "#9e9e9e" : "#37474f"
@@ -10,6 +11,8 @@ Rectangle {
         color: "black"
         width: 1
     }
+
+    signal mouseClicked(int index)
 
     Image {
         id: image
@@ -42,7 +45,10 @@ Rectangle {
         id: mouse
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: __lv.toggleSection(__ls)
+        onClicked: {
+            __lv.toggleSection(__ls)
+            root.mouseClicked(__lv.model.index)
+        }
     }
 }
 

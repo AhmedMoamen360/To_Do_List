@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
+    id: root
     property alias input_focus: txt_input.focus
     property alias input_text: txt_input.text
 
@@ -31,7 +32,7 @@ Rectangle {
         color: "white"
         onAccepted: {
             if(text != "") {
-                parent.addTask(text)
+                root.addTask(text)
                 text = ""
             }
 

@@ -14,13 +14,28 @@ Window {
         onClicked: {
             field.input_focus = false
             field.input_text = field.input_text == "" ? "Add a Task" : field.input_text
+            resetFocus(-1)
         }
     }
 
-    Component.onCompleted: field.addTask.connect(updateModel)
+    Component.onCompleted: {
+        field.addTask.connect(updateModel)
+        for(let i = 0; i < lv.model.rowCount(); i++) {
+            lv.itemAtIndex(i).mouseClicked.connect(resetFocus)
+            console.log(lv.itemAtIndex(i))
+        }
+    }
 
     function updateModel(task) {
         lv.model.addTask(task)
+    }
+
+    function resetFocus(index) {
+        for(let i = 0; i < lv.model.count; i++) {
+            if(i != index) {
+                lv.itemAtIndex(i).task_focus = false
+            }
+        }
     }
 
     TaskField {
