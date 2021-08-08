@@ -13,6 +13,7 @@ Window {
         anchors.fill: parent
         onClicked: {
             field.input_focus = false
+            lv.focus = true
             field.input_text = field.input_text == "" ? "Add a Task" : field.input_text
             resetFocus(-1)
         }
