@@ -50,7 +50,7 @@ void TaskModel::addTask(const QString& task)
 	endInsertRows();
 }
 
-void TaskModel::editTaskType(const QString& type, int row)
+void TaskModel::editType(const QString& type, int row)
 {
 	tasks[row].setType(type);
 
@@ -64,6 +64,13 @@ void TaskModel::editTask(const QString &task, int row)
 	tasks[row].setTask(task);
 
 	const QModelIndex startIndex = index(0, 0);
-	const QModelIndex endIndex   = index(tasks.count() - 1, 0);
-	emit dataChanged(startIndex, endIndex, QVector<int>() << TaskRole);
+    const QModelIndex endIndex   = index(tasks.count() - 1, 0);
+    emit dataChanged(startIndex, endIndex, QVector<int>() << TaskRole);
+}
+
+void TaskModel::deleteTask(int row)
+{
+    beginRemoveRows(QModelIndex(), row, row);
+    tasks.removeAt(row);
+    endRemoveRows();
 }

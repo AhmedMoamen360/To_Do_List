@@ -34,17 +34,20 @@ ListView {
         }
     }
 
-    function editTask(task, index)
-    {
+    function editTask(task, index) {
         model.editTask(task, index)
     }
 
-    function editTaskType(type, index)
-    {
-        model.editTaskType(type, index)
+    function editType(type, index) {
+        model.editType(type, index)
+    }
+
+    function deleteTask(index) {
+        model.deleteTask(index)
     }
 
     clip: true
+    focus: true
     flickableDirection: Flickable.VerticalFlick
     boundsBehavior: Flickable.StopAtBounds
     spacing: 5
@@ -56,8 +59,11 @@ ListView {
         text: model.task
         checked: model.type === "Completed"
         expanded: isSectionExpanded(model.type)
-        onCheckClicked: root.editTaskType(checked ? "To Do" : "Completed", model.index)
-        onEditTask: (task) => { root.editTask(task, model.index) }
+        onCheckClicked: root.editType(checked ? "To Do" : "Completed", index)
+        onEditTask: (task) => { root.editTask(task, index) }
+        onDeleteTask: {
+            root.deleteTask(index)
+        }
     }
 
     footer: Rectangle {

@@ -12,8 +12,9 @@ public:
 
 public slots:
     void addTask(const QString& task);
-    void editTaskType(const QString& type, int sorted_row);
+    void editType(const QString& type, int sorted_row);
     void editTask(const QString& task, int sorted_row);
+    void deleteTask(int sorted_row);
 
 protected:
 	bool lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const override;

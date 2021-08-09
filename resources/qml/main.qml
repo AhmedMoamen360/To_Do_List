@@ -4,7 +4,7 @@ import QtQuick.Window 2.12
 Window {
     id: root
 
-    minimumWidth: 500
+    minimumWidth: 350
     minimumHeight: 350
     visible: true
     color: ToDoStyle.backgroundColor

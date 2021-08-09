@@ -13,12 +13,12 @@ void SortedTasks::addTask(const QString &task)
 	taskModel.addTask(task);
 }
 
-void SortedTasks::editTaskType(const QString &type, int sorted_row)
+void SortedTasks::editType(const QString &type, int sorted_row)
 {
 	const QModelIndex sortedIndex = index(sorted_row, 0, QModelIndex());
 	const QModelIndex sourceIndex = mapToSource(sortedIndex);
 
-	taskModel.editTaskType(type, sourceIndex.row());
+    taskModel.editType(type, sourceIndex.row());
 }
 
 void SortedTasks::editTask(const QString &task, int sorted_row)
@@ -26,7 +26,15 @@ void SortedTasks::editTask(const QString &task, int sorted_row)
 	const QModelIndex sortedIndex = index(sorted_row, 0, QModelIndex());
 	const QModelIndex sourceIndex = mapToSource(sortedIndex);
 
-	taskModel.editTask(task, sourceIndex.row());
+    taskModel.editTask(task, sourceIndex.row());
+}
+
+void SortedTasks::deleteTask(int sorted_row)
+{
+    const QModelIndex sortedIndex = index(sorted_row, 0, QModelIndex());
+    const QModelIndex sourceIndex = mapToSource(sortedIndex);
+
+    taskModel.deleteTask(sourceIndex.row());
 }
 
 bool SortedTasks::lessThan(const QModelIndex &sourceLeft, const QModelIndex &sourceRight) const

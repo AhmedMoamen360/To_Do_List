@@ -10,5 +10,5 @@ QtObject {
     property color hoverColor: "#9e9e9e"
     property color borderColor: "black"
     property int fontTextPixelSize: 18
-    property int fontHeaderPixelSize: 20
+    property int fontHeaderPixelSize: 24
 }

@@ -6,16 +6,37 @@ Rectangle {
 
     property bool checked
     property bool expanded
+    property bool selected: false
     property alias text: textField.text
 
     signal editTask(string task)
+    signal deleteTask()
     signal checkClicked()
 
     implicitHeight: textField.height + 10
     height: expanded ? textField.height : 0
     radius: 5
-    color: mouseTask.containsMouse ? ToDoStyle.hoverColor : ToDoStyle.delegateColor
+    color: {
+        if(!selected) {
+            if(mouseTask.containsMouse) {
+                return ToDoStyle.hoverColor
+            }
+            else {
+                return ToDoStyle.delegateColor
+            }
+        }
+        else {
+            return ToDoStyle.hoverColor
+        }
+    }
     clip: true
+    focus: true
+
+    Keys.onDeletePressed: {
+        if(selected) {
+            deleteTask()
+        }
+    }
 
     Behavior on height {
         NumberAnimation {duration: 200}
@@ -78,7 +99,14 @@ Rectangle {
             id: mouseTask
             anchors.fill: parent
             hoverEnabled: true
-            onDoubleClicked: textField.forceActiveFocus()
+            onClicked: {
+                selected = !selected
+                root.forceActiveFocus()
+            }
+            onDoubleClicked: {
+                textField.forceActiveFocus()
+                root.selected = false
+            }
         }
     }
 }
