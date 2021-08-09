@@ -5,5 +5,7 @@
         <file>TaskDelegate.qml</file>
         <file>TaskField.qml</file>
         <file>TasksList.qml</file>
+        <file>ToDoStyle.qml</file>
+        <file>qmldir</file>
     </qresource>
 </RCC>

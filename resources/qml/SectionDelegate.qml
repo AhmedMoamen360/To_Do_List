@@ -19,9 +19,11 @@ Rectangle {
     Image {
         id: image
         source: "qrc:/icons/collapse.png"
-        anchors.left: root.left
-        anchors.leftMargin: 5
-        anchors.verticalCenter: parent.verticalCenter
+        anchors {
+            left: root.left
+            leftMargin: 5
+            verticalCenter: parent.verticalCenter
+        }
         fillMode: Image.PreserveAspectFit
         height: txt.height
         width: 20
@@ -34,9 +36,11 @@ Rectangle {
 
     Text {
         id: txt
-        anchors.left: image.right
-        anchors.leftMargin: 10
-        anchors.verticalCenter: root.verticalCenter
+        anchors {
+            left: image.right
+            leftMargin: 10
+            verticalCenter: root.verticalCenter
+        }
         font.pixelSize: 24
         font.bold: true
         color: "white"

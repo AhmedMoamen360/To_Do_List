@@ -4,15 +4,15 @@ import QtQuick.Controls 2.15
 Rectangle {
     id: root
 
-    property string type
+    property bool checked
     property bool expanded
-    property alias text: txt.text
+    property alias text: textField.text
 
-    signal editTaskType(string type, int index)
-    signal editTask(string task, int index)
+    signal editTask(string task)
+    signal checkClicked()
 
-    implicitHeight: txt.height + 10
-    height: expanded ? txt.height : 0
+    implicitHeight: textField.height + 10
+    height: expanded ? textField.height : 0
     radius: 5
     color: mouseTask.containsMouse ? "#9e9e9e" : "#242426"
     clip: true
@@ -24,7 +24,7 @@ Rectangle {
     Image {
         id: image
         source: {
-            if(root.type == "Completed") {
+            if(root.checked) {
                 return "qrc:/icons/completed.png"
             }
 
@@ -35,44 +35,42 @@ Rectangle {
                 return "qrc:/icons/circle.png"
             }
         }
-        anchors.left: root.left
-        anchors.leftMargin: 5
-        anchors.verticalCenter: root.verticalCenter
+        anchors {
+            left: root.left
+            leftMargin: 5
+            verticalCenter: root.verticalCenter
+        }
         fillMode: Image.PreserveAspectFit
-        height: txt.height
+        height: textField.height
         width: 20
 
         MouseArea {
             id: mouseImage
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: {
-                if(root.type == "Completed") {
-                    root.editTaskType("To Do", index)
-                }
-
-                else if(root.type == "To Do") {
-                    root.editTaskType("Completed", index)
-                }
-            }
+            onClicked: root.checkClicked()
         }
     }
 
     TextField {
-        id: txt
-        anchors.verticalCenter: root.verticalCenter
-        anchors.left: image.right
-        anchors.right: root.right
-        anchors.leftMargin: 10
-        anchors.rightMargin: 10
-        font.strikeout: root.type == "Completed" ? true : false
-        font.pixelSize: 18
+        id: textField
+        anchors {
+            verticalCenter: root.verticalCenter
+            left: image.right
+            right: root.right
+            leftMargin: 10
+            rightMargin: 10
+        }
+        font {
+            strikeout: root.checked
+            pixelSize: 18
+        }
         background: Item {}
         color: "white"
         onAccepted: {
             if(text != "") {
-                focus = false
-                root.editTask(text, index)
+                textField.focus = false
+                root.editTask(text)
             }
         }
 
@@ -80,9 +78,7 @@ Rectangle {
             id: mouseTask
             anchors.fill: parent
             hoverEnabled: true
-            onDoubleClicked: {
-                txt.focus = true
-            }
+            onDoubleClicked: textField.forceActiveFocus()
         }
     }
 }
