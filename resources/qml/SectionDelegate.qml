@@ -2,7 +2,10 @@ import QtQuick 2.0
 
 Rectangle {
     id: root
-    readonly property ListView __lv: ListView.view
+
+    property alias text: txt.text
+    property bool sectionIsExpanded
+
     readonly property string __ls: section
     color: mouse.containsMouse ? "#9e9e9e" : "#37474f"
     implicitHeight: txt.implicitHeight + 5
@@ -12,7 +15,7 @@ Rectangle {
         width: 1
     }
 
-    signal mouseClicked(int index)
+    signal toggleSection(string section)
 
     Image {
         id: image
@@ -23,7 +26,7 @@ Rectangle {
         fillMode: Image.PreserveAspectFit
         height: txt.implicitHeight
         width: 20
-        rotation: __lv.isSectionExpanded(__ls) ? 0 : -90
+        rotation: sectionIsExpanded ? 0 : -90
 
         Behavior on rotation {
             NumberAnimation {duration: 200}
@@ -37,7 +40,6 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 24
         font.bold: true
-        text: __ls
         color: "white"
     }
 
@@ -45,10 +47,6 @@ Rectangle {
         id: mouse
         anchors.fill: parent
         hoverEnabled: true
-        onClicked: {
-            __lv.toggleSection(__ls)
-            root.mouseClicked(__lv.model.index)
-        }
+        onClicked: root.toggleSection(txt.text)
     }
 }
-

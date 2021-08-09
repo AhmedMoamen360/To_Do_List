@@ -7,20 +7,20 @@ Task::Task(const QString& type, const QString& task) : type(type), task(task)
 
 QString Task::getType() const
 {
-    return type;
+	return type;
 }
 
 QString Task::getTask() const
 {
-    return task;
+	return task;
 }
 
 void Task::setType(const QString &type)
 {
-    this->type = type;
+	this->type = type;
 }
 
 void Task::setTask(const QString &task)
 {
-    this->task = task;
+	this->task = task;
 }
