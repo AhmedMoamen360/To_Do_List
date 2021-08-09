@@ -3,7 +3,6 @@
         <file>main.qml</file>
         <file>SectionDelegate.qml</file>
         <file>TaskDelegate.qml</file>
-        <file>TasksModel.qml</file>
         <file>TaskField.qml</file>
         <file>TasksList.qml</file>
     </qresource>

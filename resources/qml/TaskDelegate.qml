@@ -1,56 +1,21 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.15
 
 Rectangle {
     id: root
-    property alias task_focus: txt.focus
-    property string task_text: model.task
-    readonly property ListView __lv: ListView.view
-    property bool expanded: __lv.isSectionExpanded(model.type) // or type directly
-    implicitHeight: txt.implicitHeight + 10
-    height: expanded ? implicitHeight : 0
+
+    property string type
+    property bool expanded
+    property alias text: txt.text
+
+    signal editTaskType(string type, int index)
+    signal editTask(string task, int index)
+
+    implicitHeight: txt.height + 10
+    height: expanded ? txt.height : 0
     radius: 5
     color: mouseTask.containsMouse ? "#9e9e9e" : "#242426"
     clip: true
-
-    signal mouseClicked(int index)
-
-    //    states: [
-    //        State {
-    //            name: "To Do"
-    //            PropertyChanges {
-    //                target: __lv.model.get(index)
-    //                type: "Completed"
-    //            }
-    //        },
-    //        State {
-    //            name: "Completed"
-    //            PropertyChanges {
-    //                target: __lv.model.get(index)
-    //                type: "To Do"
-    //            }
-    //        }
-    //    ]
-
-    //    transitions: [
-    //        Transition {
-    //            from: "To Do"
-    //            to: "Completed"
-    //            PropertyAnimation {
-    //                target: __lv.model.get(index)
-    //                properties: "type"
-    //                duration: 100
-    //            }
-    //        },
-    //        Transition {
-    //            from: "To Do"
-    //            to: "Completed"
-    //            PropertyAnimation {
-    //                target: __lv.model.get(index)
-    //                properties: "type"
-    //                duration: 100
-    //            }
-    //        }
-    //    ]
 
     Behavior on height {
         NumberAnimation {duration: 200}
@@ -59,7 +24,7 @@ Rectangle {
     Image {
         id: image
         source: {
-            if(type == "Completed") {
+            if(root.type == "Completed") {
                 return "qrc:/icons/completed.png"
             }
 
@@ -70,11 +35,11 @@ Rectangle {
                 return "qrc:/icons/circle.png"
             }
         }
-        anchors.left: parent.left
+        anchors.left: root.left
         anchors.leftMargin: 5
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenter: root.verticalCenter
         fillMode: Image.PreserveAspectFit
-        height: txt.implicitHeight
+        height: txt.height
         width: 20
 
         MouseArea {
@@ -82,58 +47,38 @@ Rectangle {
             anchors.fill: parent
             hoverEnabled: true
             onClicked: {
-
-                if(type == "Completed") {
-                    __lv.model.editTaskType("To Do", index)
+                if(root.type == "Completed") {
+                    root.editTaskType("To Do", index)
                 }
 
-                else if(type == "To Do") {
-                    __lv.model.editTaskType("Completed", index)
+                else if(root.type == "To Do") {
+                    root.editTaskType("Completed", index)
                 }
-
-                root.mouseClicked(index)
-
-                //            switch (parent.state) {
-                //            case "": parent.state = type; break
-                //            case "To Do": parent.state = "Completed"; break
-                //            case "Completed": parent.state = "To Do"; break
-                //            }
             }
         }
     }
 
-
-    TextInput {
+    TextField {
         id: txt
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenter: root.verticalCenter
         anchors.left: image.right
-        anchors.right: parent.right
+        anchors.right: root.right
         anchors.leftMargin: 10
         anchors.rightMargin: 10
-        text: model.task // or task directly
-        font.strikeout: type == "Completed" ? true : false
+        font.strikeout: root.type == "Completed" ? true : false
         font.pixelSize: 18
+        background: Item {}
         color: "white"
         onAccepted: {
-            focus = false
-            if(text == "")
-                __lv.model.editTask(task_text, index)
-            else
-                task_text = model.task
+            if(text != "") {
+                root.editTask(text, index)
+            }
         }
 
         MouseArea {
             id: mouseTask
             anchors.fill: parent
             hoverEnabled: true
-            onDoubleClicked: {
-                txt.focus = true
-                task_text = txt.text
-                root.mouseClicked(index)
-            }
-            onClicked: {
-                root.mouseClicked(index)
-            }
         }
     }
 }
