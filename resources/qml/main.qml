@@ -21,6 +21,7 @@ Window {
             bottom: textField.top
             margins: 5
         }
+        focus: true
     }
 
     TaskField {

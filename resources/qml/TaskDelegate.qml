@@ -71,6 +71,7 @@ Rectangle {
         color: "white"
         onAccepted: {
             if(text != "") {
+                focus = false
                 root.editTask(text, index)
             }
         }
@@ -79,6 +80,9 @@ Rectangle {
             id: mouseTask
             anchors.fill: parent
             hoverEnabled: true
+            onDoubleClicked: {
+                txt.focus = true
+            }
         }
     }
 }
