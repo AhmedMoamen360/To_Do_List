@@ -14,7 +14,7 @@ Rectangle {
     implicitHeight: textField.height + 10
     height: expanded ? textField.height : 0
     radius: 5
-    color: mouseTask.containsMouse ? "#9e9e9e" : "#242426"
+    color: mouseTask.containsMouse ? ToDoStyle.hoverColor : ToDoStyle.delegateColor
     clip: true
 
     Behavior on height {
@@ -63,10 +63,10 @@ Rectangle {
         }
         font {
             strikeout: root.checked
-            pixelSize: 18
+            pixelSize: ToDoStyle.fontTextPixelSize
         }
         background: Item {}
-        color: "white"
+        color: ToDoStyle.textColor
         onAccepted: {
             if(text != "") {
                 textField.focus = false

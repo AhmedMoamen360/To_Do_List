@@ -8,11 +8,11 @@ Rectangle {
 
     signal toggleSection(string section)
 
-    color: mouseSection.containsMouse ? "#9e9e9e" : "#37474f"
+    color: mouseSection.containsMouse ? ToDoStyle.hoverColor : ToDoStyle.headerColor
     implicitHeight: txt.height + 5
     radius: 5
     border {
-        color: "black"
+        color: ToDoStyle.borderColor
         width: 1
     }
 
@@ -41,9 +41,11 @@ Rectangle {
             leftMargin: 10
             verticalCenter: root.verticalCenter
         }
-        font.pixelSize: 24
-        font.bold: true
-        color: "white"
+        font {
+            pixelSize: ToDoStyle.fontHeaderPixelSize
+            bold: true
+        }
+        color: ToDoStyle.textColor
     }
 
     MouseArea {

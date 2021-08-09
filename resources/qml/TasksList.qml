@@ -64,7 +64,7 @@ ListView {
         width: root.width
         height: 3
         radius: 5
-        color: "#37474f"
+        color: ToDoStyle.headerColor
     }
 
     section {

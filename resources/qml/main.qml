@@ -7,7 +7,7 @@ Window {
     minimumWidth: 500
     minimumHeight: 350
     visible: true
-    color: "#1A1B1C"
+    color: ToDoStyle.backgroundColor
     title: "To Do List"
 
     TasksList {
