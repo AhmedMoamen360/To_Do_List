@@ -4,6 +4,10 @@ This is a To Do app to handle completed and to be completed tasks
 
 The app is developed using **QT/QML** and **C++** and support cross platform
 
+## Demo
+
+![To Do Demo](images/To_Do_Demo.gif)
+
 ## Requirements
 - Qt6
 - cmake
